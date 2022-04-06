@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+   <style>
+           *{
+             box-sizing: border-box;
+             margin: 0;
+             padding: 0;
+             font-family: Arial;
+           }
+           
+           .input-box{
+
+                       height: 80px;
+                       width: 80px;
+                       margin-left: -4px;
+                       border: none;
+                       font-size: 40px;
+                       font-weight: bold;
+                       text-align: center;
+                       cursor: crosshair;
+           }
+
+           #bx1{
+                     
+                      border-right: solid 3px;
+                      border-bottom: solid 3px;
+           }
+
+           #bx2{ border-bottom: solid 3px; }
+
+           #bx3{
+                      border-left: solid 3px;
+                      border-bottom: solid 3px;
+           }
+
+           #bx4{
+                      border-right: solid 3px;
+                      border-bottom: solid 3px;
+           }
+
+           #bx5{ border-bottom: solid 3px; }
+
+           #bx6{
+                     
+                      border-left: solid 3px;
+                      border-bottom: solid 3px;
+           }
+
+           #bx7{ border-right: solid 3px; }
+
+           #bx9{ border-left: solid 3px; }
+
+
+
+
+   </style>
+
+</head>
+<body>
+        <center>
+         <div class="info-div">
+          <p style= "margin-top:10px; font-size: 35px;" id="trn">Turn: X</p><br><br>
+
+          <p id="count-x" style="display: inline-block; font-size: 25px;">X - 0</p>  
+          <p id="count-o" style="display: inline-block; margin-left: 50px;  font-size: 25px;">O - 0</p>
+         </div><br>
+         <hr size="1" width="270">
+      
+         <div class="main" style="margin-top: 5%;">
+          <form name="frm">
+
+           <input type="text" class="input-box" id="bx1" name="box1" onclick="play(this)" readonly>
+           <input type="text" class="input-box" id="bx2" name="box2" onclick="play(this)" readonly>
+           <input type="text" class="input-box" id="bx3" name="box3" onclick="play(this)" readonly><br>
+
+           <input type="text" class="input-box" id="bx4" name="box4" onclick="play(this)" readonly>
+           <input type="text" class="input-box" id="bx5" name="box5" onclick="play(this)" readonly>
+           <input type="text" class="input-box" id="bx6" name="box6" onclick="play(this)" readonly><br>
+
+           <input type="text" class="input-box" id="bx7" name="box7" onclick="play(this)" readonly>
+           <input type="text" class="input-box" id="bx8" name="box8" onclick="play(this)" readonly>
+           <input type="text" class="input-box" id="bx9" name="box9" onclick="play(this)" readonly>
+          
+          </form>
+         </div>
+
+        <button style="height: 40px; width: 90px; margin-top: 40px;
+                     border: none; border-radius: 8px; font-weight:bold; 
+                     background: #855bf8;" onclick="restart()">Restart</button>
+
+        </center>
+
+       <script>
+
+                 n = 0;
+                 t = 0;
+                 turn = "O";
+                 cntX = 0;
+                 cntO = 0;
+                 win = false;
+
+
+                 function play(elem) { 
+                        
+                    t++;
+
+                   if(n == 0){
+                      turn = "X";
+                      n++; 
+                      document.getElementById('trn').innerHTML = "Turn: O";
+                    }
+
+                   else
+                      { 
+                       n--; 
+                       turn = "O";
+                       document.getElementById('trn').innerHTML = "Turn: X";
+                     }
+                      console.log(n);
+                      
+
+                    
+                   
+
+
+                    if (elem.getAttribute("id") == "bx1") {
+                        document.frm.box1.value = turn;
+                      }
+                    if (elem.getAttribute("id") == "bx2") {
+                        document.frm.box2.value = turn;
+                      }
+                    if (elem.getAttribute("id") == "bx3") {
+                        document.frm.box3.value = turn;
+                      }
+                    if (elem.getAttribute("id") == "bx4") {
+                        document.frm.box4.value = turn;
+                      }
+                    if (elem.getAttribute("id") == "bx5") {
+                        document.frm.box5.value = turn;
+                      }
+                    if (elem.getAttribute("id") == "bx6") {
+                        document.frm.box6.value = turn;
+                      }
+                    if (elem.getAttribute("id") == "bx7") {
+                        document.frm.box7.value = turn;
+                      }
+                    if (elem.getAttribute("id") == "bx8") {
+                        document.frm.box8.value = turn;
+                      }
+                    if (elem.getAttribute("id") == "bx9") {
+                        document.frm.box9.value = turn;
+                      }
+
+                    let winBox = [
+                                    document.frm.box1.value,
+                                    document.frm.box2.value,
+                                    document.frm.box3.value,
+                                    document.frm.box4.value,
+                                    document.frm.box5.value,
+                                    document.frm.box6.value,
+                                    document.frm.box7.value,
+                                    document.frm.box8.value,
+                                    document.frm.box9.value
+                                  ]
+                    
+                   
+                    if(
+                       (winBox[0] == winBox[1] && winBox[1] == winBox[2] && winBox[0] == "X") ||
+                       (winBox[3] == winBox[4] && winBox[4] == winBox[5] && winBox[3] == "X") || 
+                       (winBox[6] == winBox[7] && winBox[7] == winBox[8] && winBox[6] == "X") ||
+                       (winBox[0] == winBox[3] && winBox[3] == winBox[6] && winBox[0] == "X") ||
+                       (winBox[1] == winBox[4] && winBox[4] == winBox[7] && winBox[1] == "X") || 
+                       (winBox[2] == winBox[5] && winBox[5] == winBox[8] && winBox[2] == "X") ||
+                       (winBox[2] == winBox[4] && winBox[4] == winBox[6] && winBox[2] == "X") ||
+                       (winBox[0] == winBox[4] && winBox[4] == winBox[8] && winBox[0] == "X") 
+                      )
+                       {
+                       setTimeout(function(){alert("X wins"),1000})
+                       win = true;
+                       cntX++;
+                       document.getElementById('count-x').innerHTML = "X - "+ cntX;
+                       setTimeout(restart,1000)
+                    }
+
+                    if(
+                       (winBox[0] == winBox[1] && winBox[1] == winBox[2] && winBox[0] == "O") ||
+                       (winBox[3] == winBox[4] && winBox[4] == winBox[5] && winBox[3] == "O") || 
+                       (winBox[6] == winBox[7] && winBox[7] == winBox[8] && winBox[6] == "O") ||
+                       (winBox[0] == winBox[3] && winBox[3] == winBox[6] && winBox[0] == "O") ||
+                       (winBox[1] == winBox[4] && winBox[4] == winBox[7] && winBox[1] == "O") || 
+                       (winBox[2] == winBox[5] && winBox[5] == winBox[8] && winBox[2] == "O") ||
+                       (winBox[2] == winBox[4] && winBox[4] == winBox[6] && winBox[2] == "O") ||
+                       (winBox[0] == winBox[4] && winBox[4] == winBox[8] && winBox[0] == "O") 
+                      )
+                       {
+                       setTimeout(function(){alert("O wins"),1000})
+                       win = true;
+                       cntO++;
+                       document.getElementById('count-o').innerHTML = "O - "+ cntO;
+                       setTimeout(restart,1000)
+                    }
+
+                    if(t == 9 && win == false){
+                       alert("Draw");
+                       restart();
+                    }
+                     
+                 }
+
+
+                 function restart(){
+
+                  document.frm.box1.value = "";
+                  document.frm.box2.value = "";
+                  document.frm.box3.value = "";
+                  document.frm.box4.value = "";
+                  document.frm.box5.value = "";
+                  document.frm.box6.value = "";
+                  document.frm.box7.value = "";
+                  document.frm.box8.value = "";
+                  document.frm.box9.value = "";
+
+                  n = 0;
+                  turn = "X";
+                  t = 0;
+                  document.getElementById('trn').innerHTML = "Turn: X";
+                 }
+
+       </script>
+</body>
+</html>
